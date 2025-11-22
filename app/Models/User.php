@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Subscription;
+use App\Models\Vote;
 
 class User extends Authenticatable
 {
@@ -54,5 +55,10 @@ class User extends Authenticatable
     public function subscriptions(): HasMany
     {
         return $this->hasMany(Subscription::class);
+    }
+
+    public function votes(): HasMany
+    {
+        return $this->hasMany(Vote::class);
     }
 }
