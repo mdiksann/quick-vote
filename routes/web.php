@@ -31,6 +31,8 @@ Route::get('/', [PollController::class, 'index'])->name('polls.index');
 // Rute Dashboard (Hanya untuk User Terautentikasi dan Terverifikasi)
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', fn() => Inertia::render('Dashboard'))->name('dashboard');
+    Route::get('/polls/create', [PollController::class, 'create'])->name('polls.create');
+    Route::post('/polls', [PollController::class, 'store'])->name('polls.store');
 });
 
 // Rute Publik untuk Detail Poll
@@ -42,4 +44,4 @@ Route::post('/polls/{poll}/vote', [PollController::class, 'vote'])
     ->name('polls.vote');
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
