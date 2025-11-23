@@ -8,6 +8,7 @@ use App\Models\Vote;
 use Inertia\Response;
 use Inertia\Inertia;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\DB;
 
 
 class PollController extends Controller
@@ -82,5 +83,48 @@ class PollController extends Controller
 
         // Redirect kembali ke halaman detail poll (dengan hasil yang diperbarui)
         return redirect()->route('polls.show', $poll)->with('success', 'Terima kasih, vote Anda telah direkam!');
+    }
+
+    public function create(): Response
+    {
+        return Inertia::render('Poll/Create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'ends_at' => ['nullable', 'date', 'after:now'],
+
+            'options' => ['required', 'array', 'min:2'],
+            'options.*.option_text' => ['required', 'string', 'max:255'],
+        ]);
+
+        try {
+            DB::transaction(function () use ($validated, $request) {
+
+                $poll = $request->user()->polls()->create([
+                    'title' => $validated['title'],
+                    'description' => $validated['description'] ?? null,
+                    'ends_at' => $validated['ends_at'] ?? null,
+                    'status' => 'active', 
+                ]);
+
+                $optionsData = collect($validated['options'])->map(function ($option, $index) {
+                    return [
+                        'option_text' => $option['option_text'],
+                        'order' => $index + 1, 
+                    ];
+                })->toArray();
+
+                $poll->options()->createMany($optionsData);
+            });
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal membuat poll. Silakan coba lagi.');
+        }
+
+        return redirect()->route('polls.index')
+            ->with('success', 'Poll Anda berhasil dibuat dan kini aktif!');
     }
 }
