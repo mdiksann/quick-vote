@@ -19,12 +19,12 @@ class Option extends Model
         'order',
     ];
 
-    public function Poll(): BelongsTo
+    public function poll(): BelongsTo
     {
         return $this->belongsTo(Poll::class);
     }
 
-    public function Votes(): HasMany
+    public function votes(): HasMany
     {
         return $this->hasMany(Vote::class);
     }
