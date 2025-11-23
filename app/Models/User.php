@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Subscription;
 use App\Models\Vote;
+use App\Models\Poll;
 
 class User extends Authenticatable
 {
@@ -60,5 +61,10 @@ class User extends Authenticatable
     public function votes(): HasMany
     {
         return $this->hasMany(Vote::class);
+    }
+
+    public function polls(): HasMany
+    {
+        return $this->hasMany(Poll::class, 'user_id');
     }
 }
