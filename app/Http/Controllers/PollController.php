@@ -29,6 +29,50 @@ class PollController extends Controller
         ]);
     }
 
+    public function dashboard(Request $request): Response
+    {
+        $user = $request->user();
+
+        // Get user's polls
+        $myPolls = Poll::with(['options', 'votes'])
+            ->where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->map(function ($poll) {
+                $poll->total_votes = $poll->votes->count();
+                return $poll;
+            });
+
+        // Get active polls
+        $activePolls = Poll::with(['creator', 'options', 'votes'])
+            ->where('status', 'active')
+            ->orderBy('created_at', 'desc')
+            ->limit(6)
+            ->get()
+            ->map(function ($poll) {
+                $poll->total_votes = $poll->votes->count();
+                return $poll;
+            });
+
+        // Get user votes
+        $myVotes = Vote::with(['poll', 'option'])
+            ->where('user_id', $user->id)
+            ->latest()
+            ->limit(5)
+            ->get();
+
+        return Inertia::render('Dashboard', [
+            'myPolls' => $myPolls,
+            'activePolls' => $activePolls,
+            'myVotes' => $myVotes,
+            'stats' => [
+                'total_polls' => $myPolls->count(),
+                'total_votes_received' => $myPolls->sum('total_votes'),
+                'total_votes_given' => $myVotes->count(),
+            ],
+        ]);
+    }
+
     public function show(Request $request, Poll $poll): Response
     {
         // Cek apakah user sudah login
@@ -108,13 +152,13 @@ class PollController extends Controller
                     'title' => $validated['title'],
                     'description' => $validated['description'] ?? null,
                     'ends_at' => $validated['ends_at'] ?? null,
-                    'status' => 'active', 
+                    'status' => 'active',
                 ]);
 
                 $optionsData = collect($validated['options'])->map(function ($option, $index) {
                     return [
                         'option_text' => $option['option_text'],
-                        'order' => $index + 1, 
+                        'order' => $index + 1,
                     ];
                 })->toArray();
 
