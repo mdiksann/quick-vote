@@ -11,17 +11,250 @@ const PollIndex = ({ auth, polls }) => {
 
     return (
         <Layout user={auth.user} fullWidth={true}>
-            <Head title="Poll Aktif" />
+            <Head title="Quick Vote - Platform Voting Modern" />
 
-            <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-8 md:py-12">
+            {/* Hero Section 1 - Main Landing - Only for guests */}
+            {!auth.user && (
+                <div className="relative min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 overflow-hidden">
+                    {/* Decorative Background Elements */}
+                    <div className="absolute inset-0 overflow-hidden">
+                        <div className="absolute -top-40 -right-40 w-80 h-80 bg-white opacity-10 rounded-full blur-3xl"></div>
+                        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-white opacity-10 rounded-full blur-3xl"></div>
+                        <div className="absolute -bottom-32 right-1/4 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+                    </div>
+
+                    {/* Navigation Bar */}
+                    <nav className="relative z-10 px-4 sm:px-6 lg:px-8 py-6">
+                        <div className="max-w-7xl mx-auto flex items-center justify-between">
+                            <div className="flex items-center space-x-2">
+                                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-lg">
+                                    <svg
+                                        className="w-6 h-6 text-indigo-600"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                                        />
+                                    </svg>
+                                </div>
+                                <span className="text-2xl font-bold text-white">
+                                    Quick Vote
+                                </span>
+                            </div>
+
+                            {!auth.user && (
+                                <div className="flex items-center space-x-3">
+                                    <Link
+                                        href={route("login")}
+                                        className="px-6 py-2.5 text-white font-medium hover:bg-white hover:bg-opacity-10 rounded-lg transition-all duration-200"
+                                    >
+                                        Login
+                                    </Link>
+                                    <Link
+                                        href={route("register")}
+                                        className="px-6 py-2.5 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl"
+                                    >
+                                        Register
+                                    </Link>
+                                </div>
+                            )}
+
+                            {auth.user && (
+                                <div className="flex items-center space-x-4">
+                                    <Link
+                                        href={route("dashboard")}
+                                        className="px-6 py-2.5 text-white font-medium hover:bg-white hover:bg-opacity-10 rounded-lg transition-all duration-200"
+                                    >
+                                        Dashboard
+                                    </Link>
+                                    <Link
+                                        href={route("polls.create")}
+                                        className="px-6 py-2.5 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-opacity-90 transition-all duration-200 shadow-lg"
+                                    >
+                                        Buat Poll
+                                    </Link>
+                                </div>
+                            )}
+                        </div>
+                    </nav>
+
+                    {/* Hero Content */}
+                    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+                        <div className="text-center">
+                            <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+                                Platform Voting
+                                <span className="block text-yellow-300">
+                                    Modern & Interaktif
+                                </span>
+                            </h1>
+                            <p className="text-xl md:text-2xl text-indigo-100 mb-8 max-w-3xl mx-auto leading-relaxed">
+                                Buat polling dengan mudah, kumpulkan opini, dan
+                                lihat hasil real-time. Suara Anda penting untuk
+                                membuat keputusan bersama.
+                            </p>
+
+                            {/* Feature Badges */}
+                            <div className="flex flex-wrap justify-center gap-4 mb-12">
+                                <div className="flex items-center space-x-2 bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-full text-white">
+                                    <svg
+                                        className="w-5 h-5"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clipRule="evenodd"
+                                        />
+                                    </svg>
+                                    <span className="font-medium">
+                                        Hasil Real-Time
+                                    </span>
+                                </div>
+                                <div className="flex items-center space-x-2 bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-full text-white">
+                                    <svg
+                                        className="w-5 h-5"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clipRule="evenodd"
+                                        />
+                                    </svg>
+                                    <span className="font-medium">
+                                        Mudah Digunakan
+                                    </span>
+                                </div>
+                                <div className="flex items-center space-x-2 bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-full text-white">
+                                    <svg
+                                        className="w-5 h-5"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clipRule="evenodd"
+                                        />
+                                    </svg>
+                                    <span className="font-medium">
+                                        Gratis Selamanya
+                                    </span>
+                                </div>
+                            </div>
+
+                            {/* CTA Buttons */}
+                            <div className="flex flex-col sm:flex-row justify-center gap-4">
+                                <a
+                                    href="#polls"
+                                    className="inline-flex items-center justify-center px-8 py-4 bg-white text-indigo-600 font-bold text-lg rounded-xl hover:bg-opacity-90 transition-all duration-200 shadow-2xl hover:shadow-3xl transform hover:-translate-y-1"
+                                >
+                                    <span>Lihat Poll Aktif</span>
+                                    <svg
+                                        className="w-5 h-5 ml-2"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M19 9l-7 7-7-7"
+                                        />
+                                    </svg>
+                                </a>
+                                {!auth.user && (
+                                    <Link
+                                        href={route("register")}
+                                        className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white font-bold text-lg rounded-xl hover:bg-white hover:text-indigo-600 transition-all duration-200 shadow-lg"
+                                    >
+                                        Mulai Sekarang
+                                        <svg
+                                            className="w-5 h-5 ml-2"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M13 7l5 5m0 0l-5 5m5-5H6"
+                                            />
+                                        </svg>
+                                    </Link>
+                                )}
+                                {auth.user && (
+                                    <Link
+                                        href={route("polls.create")}
+                                        className="inline-flex items-center justify-center px-8 py-4 bg-yellow-400 text-gray-900 font-bold text-lg rounded-xl hover:bg-yellow-300 transition-all duration-200 shadow-lg"
+                                    >
+                                        Buat Poll Baru
+                                        <svg
+                                            className="w-5 h-5 ml-2"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M12 4v16m8-8H4"
+                                            />
+                                        </svg>
+                                    </Link>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Scroll Indicator */}
+                    <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+                        <svg
+                            className="w-6 h-6 text-white"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                            />
+                        </svg>
+                    </div>
+                </div>
+            )}
+
+            {/* Hero Section 2 - Polls Section */}
+            <div
+                id="polls"
+                className={`min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 ${
+                    auth.user ? "py-8 md:py-12" : "py-16 md:py-24"
+                }`}
+            >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Header Section */}
-                    <div className="text-center mb-12">
-                        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+                    <div
+                        className={`text-center ${
+                            auth.user ? "mb-8" : "mb-16"
+                        }`}
+                    >
+                        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
                             <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
                                 Poll Aktif
                             </span>
-                        </h1>
+                        </h2>
                         <p className="text-gray-600 text-lg max-w-2xl mx-auto">
                             Berikan suara Anda pada topik yang paling menarik
                         </p>
