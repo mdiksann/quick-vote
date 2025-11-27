@@ -15,10 +15,6 @@ Route::get('/home', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -30,7 +26,7 @@ Route::get('/', [PollController::class, 'index'])->name('polls.index');
 
 // Rute Dashboard (Hanya untuk User Terautentikasi dan Terverifikasi)
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', fn() => Inertia::render('Dashboard'))->name('dashboard');
+    Route::get('/dashboard', [PollController::class, 'dashboard'])->name('dashboard');
     Route::get('/polls/create', [PollController::class, 'create'])->name('polls.create');
     Route::post('/polls', [PollController::class, 'store'])->name('polls.store');
 });
