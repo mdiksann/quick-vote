@@ -6,14 +6,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PollController;
 use Inertia\Inertia;
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('welcome');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -21,8 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-Route::get('/', [PollController::class, 'index'])->name('polls.index');
+Route::get('/polls', [PollController::class, 'index'])->name('polls.index');
 
 // Rute Dashboard (Hanya untuk User Terautentikasi dan Terverifikasi)
 Route::middleware(['auth', 'verified'])->group(function () {
