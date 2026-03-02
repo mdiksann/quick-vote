@@ -12,21 +12,21 @@ export default function Dashboard({ myPolls, activePolls, myVotes, stats }) {
         >
             <Head title="Dashboard" />
 
-            <div className="py-8 bg-gray-50 min-h-screen">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="py-8 min-h-screen">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
                     {/* Stats Cards */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-sm text-gray-600 font-medium">
+                                    <p className="text-sm text-gray-500 font-medium">
                                         Poll Saya
                                     </p>
-                                    <p className="text-3xl font-bold text-gray-900 mt-2">
+                                    <p className="text-3xl font-extrabold text-gray-900 mt-2">
                                         {stats.total_polls}
                                     </p>
                                 </div>
-                                <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+                                <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center">
                                     <svg
                                         className="w-6 h-6 text-indigo-600"
                                         fill="none"
@@ -44,19 +44,19 @@ export default function Dashboard({ myPolls, activePolls, myVotes, stats }) {
                             </div>
                         </div>
 
-                        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-sm text-gray-600 font-medium">
+                                    <p className="text-sm text-gray-500 font-medium">
                                         Suara Diterima
                                     </p>
-                                    <p className="text-3xl font-bold text-gray-900 mt-2">
+                                    <p className="text-3xl font-extrabold text-gray-900 mt-2">
                                         {stats.total_votes_received}
                                     </p>
                                 </div>
-                                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center">
                                     <svg
-                                        className="w-6 h-6 text-green-600"
+                                        className="w-6 h-6 text-emerald-600"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -72,17 +72,17 @@ export default function Dashboard({ myPolls, activePolls, myVotes, stats }) {
                             </div>
                         </div>
 
-                        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-sm text-gray-600 font-medium">
+                                    <p className="text-sm text-gray-500 font-medium">
                                         Suara Diberikan
                                     </p>
-                                    <p className="text-3xl font-bold text-gray-900 mt-2">
+                                    <p className="text-3xl font-extrabold text-gray-900 mt-2">
                                         {stats.total_votes_given}
                                     </p>
                                 </div>
-                                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                                <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center">
                                     <svg
                                         className="w-6 h-6 text-purple-600"
                                         fill="none"
@@ -102,20 +102,22 @@ export default function Dashboard({ myPolls, activePolls, myVotes, stats }) {
                     </div>
 
                     {/* Quick Action */}
-                    <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl shadow-lg p-6 mb-8">
-                        <div className="flex items-center justify-between">
+                    <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl shadow-md p-6 mb-8 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 -mt-6 -mr-6 w-32 h-32 bg-white opacity-10 rounded-full"></div>
+                        <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-20 h-20 bg-white opacity-10 rounded-full"></div>
+                        <div className="flex items-center justify-between relative z-10">
                             <div className="text-white">
-                                <h3 className="text-xl font-bold mb-2">
+                                <h3 className="text-xl font-bold mb-1">
                                     Buat Poll Baru
                                 </h3>
-                                <p className="text-indigo-100">
+                                <p className="text-indigo-200 text-sm">
                                     Kumpulkan opini dari komunitas dengan
                                     membuat polling baru
                                 </p>
                             </div>
                             <Link
                                 href={route("polls.create")}
-                                className="px-6 py-3 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-opacity-90 transition-all duration-200 shadow-lg flex items-center space-x-2"
+                                className="px-5 py-2.5 bg-white text-indigo-600 font-semibold rounded-xl hover:bg-amber-400 hover:text-gray-900 transition-all duration-200 shadow-md flex items-center space-x-2 text-sm"
                             >
                                 <svg
                                     className="w-5 h-5"
@@ -137,8 +139,8 @@ export default function Dashboard({ myPolls, activePolls, myVotes, stats }) {
 
                     {/* My Polls */}
                     <div className="mb-8">
-                        <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-2xl font-bold text-gray-900">
+                        <div className="flex items-center justify-between mb-5">
+                            <h2 className="text-xl font-bold text-gray-900">
                                 Poll Saya
                             </h2>
                             <Link
@@ -154,7 +156,7 @@ export default function Dashboard({ myPolls, activePolls, myVotes, stats }) {
                                 {myPolls.map((poll) => (
                                     <div
                                         key={poll.id}
-                                        className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
+                                        className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
                                     >
                                         <div className="flex items-start justify-between mb-4">
                                             <h3 className="text-lg font-semibold text-gray-900 line-clamp-2">
@@ -205,7 +207,7 @@ export default function Dashboard({ myPolls, activePolls, myVotes, stats }) {
                                 ))}
                             </div>
                         ) : (
-                            <div className="bg-white rounded-xl border-2 border-dashed border-gray-300 p-12 text-center">
+                            <div className="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-12 text-center">
                                 <svg
                                     className="w-16 h-16 mx-auto mb-4 text-gray-400"
                                     fill="none"
@@ -224,7 +226,7 @@ export default function Dashboard({ myPolls, activePolls, myVotes, stats }) {
                                 </p>
                                 <Link
                                     href={route("polls.create")}
-                                    className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700"
+                                    className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl hover:from-indigo-700 hover:to-purple-700 shadow-sm text-sm"
                                 >
                                     Buat Poll Pertama
                                 </Link>
@@ -234,8 +236,8 @@ export default function Dashboard({ myPolls, activePolls, myVotes, stats }) {
 
                     {/* Active Polls */}
                     <div>
-                        <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-2xl font-bold text-gray-900">
+                        <div className="flex items-center justify-between mb-5">
+                            <h2 className="text-xl font-bold text-gray-900">
                                 Poll Aktif
                             </h2>
                             <Link
@@ -250,7 +252,7 @@ export default function Dashboard({ myPolls, activePolls, myVotes, stats }) {
                             {activePolls.map((poll) => (
                                 <div
                                     key={poll.id}
-                                    className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
+                                    className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
                                 >
                                     <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
                                         {poll.title}
@@ -295,7 +297,7 @@ export default function Dashboard({ myPolls, activePolls, myVotes, stats }) {
                                         </div>
                                         <Link
                                             href={`/polls/${poll.id}`}
-                                            className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700"
+                                            className="px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-semibold rounded-xl hover:from-indigo-700 hover:to-purple-700 shadow-sm"
                                         >
                                             Vote
                                         </Link>
