@@ -25,12 +25,12 @@ const PollShow = ({
     return (
         <GuestLayout fullWidth={true}>
             <Head title={poll.title} />
-            <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-8 md:py-12">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="min-h-screen bg-gray-50 py-8 md:py-12">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
                     {/* Back Button */}
                     <Link
                         href={route("polls.index")}
-                        className="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium mb-6 transition-all duration-200 group"
+                        className="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium text-sm mb-6 transition-all duration-200 group"
                     >
                         <svg
                             className="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform"
@@ -48,11 +48,11 @@ const PollShow = ({
                         Kembali ke Daftar Poll
                     </Link>
 
-                    {/* Header Poll - Modern Card with Gradient */}
-                    <div className="relative bg-gradient-to-r from-indigo-600 to-purple-600 p-8 md:p-10 shadow-2xl rounded-2xl mb-8 overflow-hidden">
+                    {/* Header Poll - Modern Card */}
+                    <div className="relative bg-gradient-to-r from-indigo-600 to-purple-600 p-8 md:p-10 shadow-md rounded-2xl mb-8 overflow-hidden">
                         {/* Decorative circles */}
-                        <div className="absolute top-0 right-0 -mt-4 -mr-4 w-40 h-40 bg-white opacity-10 rounded-full"></div>
-                        <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-32 h-32 bg-white opacity-10 rounded-full"></div>
+                        <div className="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-white opacity-10 rounded-full"></div>
+                        <div className="absolute bottom-0 left-0 -mb-6 -ml-6 w-24 h-24 bg-white opacity-10 rounded-full"></div>
 
                         <div className="relative z-10">
                             <div className="flex items-start justify-between mb-4">
